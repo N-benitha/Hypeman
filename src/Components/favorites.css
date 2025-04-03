@@ -1,0 +1,51 @@
+.favorites-container {
+    padding: 24px;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .favorites-container h2 {
+    margin-bottom: 24px;
+    text-align: center;
+  }
+  
+  .favorites-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .favorite-item {
+    background-color: white;
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .favorite-content {
+    margin-bottom: 12px;
+  }
+  
+  .favorite-audio {
+    margin-bottom: 12px;
+  }
+  
+  .favorite-audio audio {
+    width: 100%;
+  }
+  
+  .remove-favorite {
+    padding: 8px 16px;
+    border: none;
+    background-color: #ff4d4f;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  
+  .no-favorites {
+    text-align: center;
+    color: #777;
+    padding: 48px 24px;
+  }

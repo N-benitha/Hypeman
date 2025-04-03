@@ -1,0 +1,8 @@
+{
+  "projects": {
+    "default": "hypeman-7678f",
+    "staging": "hypeman-7678f"
+  },
+  "targets": {},
+  "etags": {}
+}
