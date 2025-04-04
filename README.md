@@ -1,4 +1,4 @@
-# HypeMan
+![alt banner](HypeMan.png)
 
 ![GitHub last commit](https://img.shields.io/github/last-commit/N-benitha/Hypeman2)
 
