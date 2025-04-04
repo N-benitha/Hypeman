@@ -1,6 +1,6 @@
-                                  ![alt banner](HypeMan.png)
+  ![alt banner](HypeMan.png)
 
-            ![GitHub last commit](https://img.shields.io/github/last-commit/N-benitha/Hypeman2)
+  ![GitHub last commit](https://img.shields.io/github/last-commit/N-benitha/Hypeman2)
 
 HypeMan is a website for generating AI-powered speech content to motivate its users through tough times, like experiencing imposter syndrome, anxiety, or any other issue that hinders them from using their full potential. Everyone needs encouragement at some points in their life, and they may or may not get it. HypeMan has your back with personalized motivations that will help you get through those tough times.
 
