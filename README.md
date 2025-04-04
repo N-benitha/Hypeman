@@ -133,7 +133,7 @@ Either:
 
 ## License
 
-[[MIT](LICENSE)](https://github.com/N-benitha/Hypeman2/blob/7ab79c8ef6fd1ab4d8f19649ecf0286f7bd7077a/LICENSE)
+[[MIT LICENSE](https://github.com/N-benitha/Hypeman2/blob/7ab79c8ef6fd1ab4d8f19649ecf0286f7bd7077a/LICENSE)
 
 ## Contact
 
