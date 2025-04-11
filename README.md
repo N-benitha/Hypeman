@@ -1,8 +1,10 @@
   ![alt banner](HypeMan.png)
 
   ![GitHub last commit](https://img.shields.io/github/last-commit/N-benitha/Hypeman2)
+  
+Like every normal individual, I sometimes get imposter syndrome—heck, I had it the whole time while doing this project. I searched for motivation in all the places I could think of and sometimes fell short. This type of situation can prevent you from delivering what you are supposed to. HypeMan is a website for generating AI-powered speech content to motivate its users through tough times, like experiencing imposter syndrome, anxiety, or any other issue that hinders them from using their full potential. Everyone needs encouragement at some points in their life, and they may or may not get it. HypeMan has your back with personalized motivations that will help you get through those tough times.
 
-HypeMan is a website for generating AI-powered speech content to motivate its users through tough times, like experiencing imposter syndrome, anxiety, or any other issue that hinders them from using their full potential. Everyone needs encouragement at some points in their life, and they may or may not get it. HypeMan has your back with personalized motivations that will help you get through those tough times.
+
 ![alt banner](chat1.png) ![alt banner](chat2.png)
 
 Check out HypeMan [here](https://hypeman-7678f.web.app/)🔥!
