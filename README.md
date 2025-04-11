@@ -3,7 +3,7 @@
   ![GitHub last commit](https://img.shields.io/github/last-commit/N-benitha/Hypeman2)
 
 HypeMan is a website for generating AI-powered speech content to motivate its users through tough times, like experiencing imposter syndrome, anxiety, or any other issue that hinders them from using their full potential. Everyone needs encouragement at some points in their life, and they may or may not get it. HypeMan has your back with personalized motivations that will help you get through those tough times.
-
+![alt banner](chat1.png) ![alt banner](chat2.png)
 ## Overview
 
 Hypeman API serves as the backend for the Hypeman platform, providing endpoints for AI-generated text content and text-to-speech conversion using Groq's LLM and TTS services. The application also integrates with Firebase Firestore to manage user chat history.
