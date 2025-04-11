@@ -4,6 +4,9 @@
 
 HypeMan is a website for generating AI-powered speech content to motivate its users through tough times, like experiencing imposter syndrome, anxiety, or any other issue that hinders them from using their full potential. Everyone needs encouragement at some points in their life, and they may or may not get it. HypeMan has your back with personalized motivations that will help you get through those tough times.
 ![alt banner](chat1.png) ![alt banner](chat2.png)
+
+Check out HypeMan [here](https://hypeman-7678f.web.app/)🔥!
+
 ## Overview
 
 Hypeman API serves as the backend for the Hypeman platform, providing endpoints for AI-generated text content and text-to-speech conversion using Groq's LLM and TTS services. The application also integrates with Firebase Firestore to manage user chat history.
@@ -25,12 +28,6 @@ Hypeman API serves as the backend for the Hypeman platform, providing endpoints 
 - React.js
 
 ## API Endpoints
-
-### Health Check
-```
-GET /test
-```
-Returns a simple message confirming the API is running.
 
 ### Generate Text and Speech
 ```
@@ -131,6 +128,11 @@ Either:
   kill -9 <PID>
   ```
 
+## Related projects
+
+- [Calm](https://www.calm.com/)
+- [HeadSpace](https://www.headspace.com/)
+
 ## License
 
 [MIT LICENSE](https://github.com/N-benitha/Hypeman2/blob/7ab79c8ef6fd1ab4d8f19649ecf0286f7bd7077a/LICENSE)
@@ -138,3 +140,4 @@ Either:
 ## Contact
 
 For support or inquiries, do not hesitate to contact me here.
+[LinkeIn](https://www.linkedin.com/in/ngunga-benitha-26b43921b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app)
