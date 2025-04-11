@@ -4,7 +4,7 @@
   
 Like every normal individual, I sometimes get imposter syndrome—heck, I had it the whole time while doing this project. I searched for motivation in all the places I could think of and sometimes fell short. This type of situation can prevent you from delivering what you are supposed to. HypeMan is a website for generating AI-powered speech content to motivate its users through tough times, like experiencing imposter syndrome, anxiety, or any other issue that hinders them from using their full potential. Everyone needs encouragement at some points in their life, and they may or may not get it. HypeMan has your back with personalized motivations that will help you get through those tough times.
 
-Check out HypeMan [here](https://hypeman-7678f.web.app/)🔥, and for better understanding, here's my [Blog Post]([https://docs.google.com/presentation/d/1QVEQc0vhS7yAxKn4BVG6OGkUZTPoZ2ZjcVqKjgLiU_w/edit?usp=sharing](https://medium.com/@ngungabn03/building-hypeman-my-journey-through-voice-powered-motivation-612eaf7ac8c3))!
+Check out HypeMan [here](https://hypeman-7678f.web.app/)🔥, and for better understanding, here's my [Blog Post](https://medium.com/@ngungabn03/building-hypeman-my-journey-through-voice-powered-motivation-612eaf7ac8c3)!
 
 ![alt banner](chat1.png)
 
