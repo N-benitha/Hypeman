@@ -14,16 +14,13 @@ const NewPrompt = ({ onSendMessage, chatId }) => {
     const [isLoading, setIsLoading] = useState(false);
     const [selectedDuration, setSelectedDuration] = useState(1);
     const [currentAudioBase64, setCurrentAudioBase64] = useState(null);
+    const [currentAudioId, setCurrentAudioId] = useState(null);
     const [currentDuration, setCurrentDuration] = useState(null);
     const [error, setError] = useState(null);
     const inputRef = useRef(null);
     const auth = getAuth(app);
     const db = getFirestore(app);
 
-    // useEffect(() => {
-    //     endRef.current?.scrollIntoView({ behavior: 'smooth' })
-
-    // }, [question, answer]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -75,6 +72,9 @@ const NewPrompt = ({ onSendMessage, chatId }) => {
 
           inputRef.current.value = '';
 
+          setCurrentAudioBase64(null);
+          setCurrentAudioId(null);
+
           const systemPrompt = `You are a motivational coach called Hypeman. Your goal is to provide encouragement and motivation to help people overcome challenges like imposter syndrome, anxiety, or tough workouts. Keep your response concise but powerful, suitable for a ${selectedDuration}-minute audio recording.`;
 
           const response = await axios.post('/api/generate', {
@@ -85,9 +85,11 @@ const NewPrompt = ({ onSendMessage, chatId }) => {
 
           const aiContent = response.data.text;
           const audioBase64 = response.data.audio;
+          const audioId = response.data.audioId;
 
           // set the current audio for immediate playback
           setCurrentAudioBase64(audioBase64);
+          setCurrentAudioId(audioId);
           setCurrentDuration(selectedDuration);
 
           const aiMessage = {
@@ -95,16 +97,18 @@ const NewPrompt = ({ onSendMessage, chatId }) => {
             sender: 'ai',
             createdAt: serverTimestamp(),
             type: 'text',
-            audioData: audioBase64,
+            audioId: audioId,
             duration: selectedDuration
           };
 
           const aiMessageDoc = await addDoc(messagesRef, aiMessage);
 
+          // for immediate display, send both text and audio to the handler
           if (typeof onSendMessage === 'function') {
             onSendMessage({
               id: aiMessageDoc.id,
               ...aiMessage,
+              audioData: audioBase64,
               createdAt: new Date()
             });  
           }
@@ -122,9 +126,6 @@ const NewPrompt = ({ onSendMessage, chatId }) => {
 
   return (
     <>
-      { currentAudioBase64 && (
-        <AudioPlayer audioBase64={currentAudioBase64} duration={currentDuration} />
-      ) }
       <div className='prompt-container'>
           {error && <div className='error-message'>{error}</div>}
           <form className='newForm' onSubmit={handleSubmit}>

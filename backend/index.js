@@ -3,12 +3,14 @@ import cors from "cors";
 import { createRequire } from 'module';
 import dotenv from 'dotenv';
 import axios from 'axios';
-import { log } from "console";
 
 dotenv.config();
 const port = process.env.PORT || 3000;
 const app = express();
 
+let admin;
+
+// middleware for CORS
 app.use(cors({
     origin: process.env.CLIENT_URL || "http://localhost:5173",
 }));
@@ -17,9 +19,9 @@ app.use(express.json());
 
 // Initializing Firebase Admin SDK
 const connect = async () => {
-  
+
     const require = createRequire(import.meta.url);
-    var admin = require("firebase-admin");
+    admin = require("firebase-admin");
     var serviceAccount = require("./service_account_key.json");
 
     try {
@@ -29,8 +31,10 @@ const connect = async () => {
       });
   
       console.log("Connected to Firebase Firestore");
+      return true;
     } catch (err) {
       console.error("Firebase connection error:", err);
+      return false;
     }
   };
 
@@ -43,10 +47,10 @@ app.get("/test", (req, res) => {
 // Generate text and speech
 app.post("/api/generate", async (req, res) => {
   try {
+    if (!admin) {
+      return res.status(500).json({ error: "Firebase Admin SDK not initialized"});
+    }
     const { prompt, systemPrompt, duration } = req.body;
-    // console.log(prompt);
-    // console.log(systemPrompt);
-    // console.log(duration);     
 
     // calling Groq API for text generation
     const groqResponse = await axios.post(
@@ -87,19 +91,69 @@ app.post("/api/generate", async (req, res) => {
         responseType: 'arraybuffer'
       }
     );
+  
+    console.log("Audio generated successfully, size:", ttsResponse.data.length);
 
     // converting audio to base64 for front-end
     const audioBase64 = Buffer.from(ttsResponse.data).toString('base64');
 
+    // generating a unique ID for the audio
+    const audioId=`audio_${Date.now()}_${Math.floor(Math.random() * 1000)}`;
+
+    // storing the audio data in Realtime Database
+    const db = admin.database();
+    await db.ref(`audio/${audioId}`). set({
+      data: audioBase64,
+      createdAt: admin.database.ServerValue.TIMESTAMP
+    });
+
+    console.log("Audio stored in RTDB with ID:", audioId);
+    
+
     // returning both audio and text
     res.json({
       text: generatedText,
-      audio: audioBase64
+      audio: audioBase64, // for immediate playback
+      audioId: audioId // for retrieval from RTDB later
     });
 
   } catch (error) {
     console.error("Error generating content:", error.response?.data || error.message);
+    if (error.response) {
+      console.error("Response data:", error.response.data);
+      console.error("Response status:", error.response.status);
+      console.error("Response headers:", error.response.headers);
+    } else if (error.request) {
+      console.error("No response received:", error.request);
+    } else {
+      console.error("Error setting up request:", error.message);
+    }
     res.status(500).json({ error: "Failed to generate content", details: error.response?.data || error.message });
+    
+  }
+});
+
+// endpoint to retrieve audio
+app.get("/api/audio/:audioId", async (req, res) => {
+  try {
+    if (!admin) {
+      return res.status(500).json({ error: "Firebase Admin SDK not initialized"});
+    }
+
+    // getting the audio ID from the request parameters
+    const { audioId } = req.params;
+    const db = admin.database();
+    const audioSnapshot = await db.ref(`audio/${audioId}`).once('value');
+    const audioData = audioSnapshot.val();
+
+    if (!audioData || !audioData.data) {
+      return res.status(404).json({ error: "Audio not found" });
+    }
+
+    res.json({ audio: audioData.data });
+  } catch (error) {
+    console.error("Error retrieving the audio:", error);
+    res.status(500).json({ error: "Failed to retrieve audio" });
     
   }
 });
@@ -108,6 +162,11 @@ app.post("/api/generate", async (req, res) => {
 // Creating a new chat
 app.post("/api/chats", async (req, res) => {
   try {
+    if (!admin) {
+      return res.status(500).json({ error: "Firebase Admin SDK not initialized"});
+    }
+
+    // getting the user ID and title from the request body
     const { userId, title } = req.body;
 
     if (!userId) {
@@ -133,6 +192,11 @@ app.post("/api/chats", async (req, res) => {
 // getting user's history 
 app.get("/api/chats/:userId", async (req, res) => {
   try {
+    if (!admin) {
+      return res.status(500).json({ error: "Firebase Admin SDK not initialized"});
+    }
+
+    // getting the user ID from the request parameters
     const { userId } = req.params;
     const db = admin.firestore();
     const chatsSnapshot = await db.collection("users").doc(userId).collection("chats").orderBy("createdAt", "desc").get();
@@ -156,6 +220,18 @@ app.get("/api/chats/:userId", async (req, res) => {
 
 // starting the server
 app.listen(port, async () => {
-    await connect();
-    console.log(`Hypeman server is running on port ${port}`);
+  // await connect();
+  // console.log(`Hypeman server is running on port ${port}`);
+    try {
+      const connected = await connect();
+      if (connected) {
+        console.log(`Hypeman server is running on port ${port}`);
+      } else {
+        console.error("Server started but Firebase connection failed");
+      } 
+    } catch (error) {
+      console.error("Error starting server:", error);
+      
+    }
+    
 });

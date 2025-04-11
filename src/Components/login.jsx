@@ -1,7 +1,7 @@
 import './signup.css';
 import React, { useState } from 'react';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-import { getDatabase, ref, set } from 'firebase/database';
+import { getDatabase, ref, set, update } from 'firebase/database';
 import { Link, useNavigate } from 'react-router-dom';
 import app from '../firebaseConfig';
 
@@ -19,13 +19,13 @@ function LogIn() {
         try {
             const userCredential = await signInWithEmailAndPassword(auth, email, password);
             const user = userCredential.user;
-            await set(ref(db, 'users/' + user.uid), {
+            await update(ref(db, 'users/' + user.uid), {
                 email: user.email,
                 lastLogin: new Date().toISOString(),
             });
             console.log('User logged in and data stored in database');
 
-            navigate('/dashboard/chats/:id');
+            navigate(`/dashboard/chats`);
         } catch (error) {
             setError(error.message);
         }

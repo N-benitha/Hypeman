@@ -28,6 +28,7 @@
   padding: 3px 9px;
   transition: font-size 0.9s;
   transition-delay: 0.7;
+  padding: 10px;
 }
 .navbar .navbar-list ul li:hover {
   background-color: #2b3261;

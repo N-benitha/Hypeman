@@ -9,10 +9,10 @@
     .wrapper {
         flex: 1;
         /* height: 100%; */
-        overflow: scroll;
         width: 100%;
         display: flex;
         justify-content: center;
+        overflow: hidden;
         scrollbar-width: thin;
         scrollbar-color: thistle transparent;
 
@@ -30,17 +30,22 @@
             display: flex;
             flex-direction: column;
             gap: 20px;
+            padding: 20px;
+            overflow-y: auto;
+            padding-bottom: 80px;
 
             .message {
-                padding: 20px;
+                padding: 5px 10px;
 
-                &.user {
+                &.user-message {
                     background-color: thistle;
                     border-radius: 20px;
-                    max-width: 80%;
+                    max-width: 100%;
                     align-self: flex-end;
+                    
                 }
             }
         }
     }
 }
+

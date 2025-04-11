@@ -20,6 +20,22 @@
         padding-top: 20px;
     }
 
+    .new-chat-btn {
+        border: none;
+        outline: none;
+        padding: 10px;
+        color: inherit;
+        background-color: #fff;
+        border-radius: 10px;
+        font-size: 0.9rem;
+
+        &:hover {
+            background-color: rgb(138, 125, 138);
+            color: white;
+            cursor: pointer;
+        }
+    }
+
     .chats-container {
         display: flex;
         flex-direction: column;

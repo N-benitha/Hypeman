@@ -6,6 +6,7 @@ import { getAuth } from 'firebase/auth';
 import app from '../firebaseConfig';
 import { getFirestore, collection, query, orderBy, onSnapshot, doc, serverTimestamp, addDoc } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
+import AudioPlayer from './audioPlayer';
 
 const ChatPage = () => {
   const [messages, setMessages] = useState([]);
@@ -61,7 +62,19 @@ const ChatPage = () => {
           ...doc.data(),
           createdAt: doc.data().createdAt?.toDate() || new Date()
         }));
-        setMessages(messagesData);
+
+        // ensure we don't have duplicates before setting the state
+        const uniqueMessages = [];
+        const messageIds = new Set();
+
+        messagesData.forEach(message => {
+          if (!messageIds.has(message.id)) {
+            messageIds.add(message.id);
+            uniqueMessages.push(message);
+          }
+        });
+
+        setMessages(uniqueMessages);
         setLoading(false);
       });
 
@@ -75,8 +88,25 @@ const ChatPage = () => {
     // check if message already exists
     if (!messages.some(msg => msg.id === newMessage.id)) {
       setMessages(prevMessages => [...prevMessages, newMessage]);
+    } else {
+      // if it exits, update it instead of adding a new one
+      setMessages(prevMessages => prevMessages.map(msg => msg.id === newMessage.id ? { ...msg, ...newMessage } : msg));
     }
   };
+
+  const renderMessage = (message) => {
+    // for user message, always show the content
+    if (message.sender === 'user') {
+      return <div className="message user-message">{message.content}</div>;
+    }
+    // for AI messages, only show the audio player if available
+    if (message.audioData || message.audioId) {
+      return <AudioPlayer audioId={message.audioId} audioData={message.audioData} />;
+    }
+
+    // fallback for ai messages without audio
+    return <div className="message ai-message">{message.content}</div>;
+  }
 
   return (
     <div className="chatPage">
@@ -93,14 +123,7 @@ const ChatPage = () => {
                     ) : (
                       messages.map(message => (
                         <div key={message.id} className={`message ${message.sender === 'user' ? 'user-message' : 'ai-message'}`}>
-                          <div className="message-content">{message.content}</div>
-                          {message.audioData && (
-                            <div className="audio-player">
-                              <audio controls src={`data:audio/wav;base64,${message.audioData}`}>
-                                Your browser does not support the audio element.
-                              </audio>
-                            </div>
-                          )}
+                          {renderMessage(message)}
                         </div>
                       ))
                     )}

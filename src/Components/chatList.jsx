@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './chatList.css';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
+// import { faSquarePen } from "@fortawesome/free-regular-svg-icons";
 import { getAuth } from 'firebase/auth';
 import { addDoc, collection, doc, getFirestore, onSnapshot, serverTimestamp, query, orderBy } from 'firebase/firestore';
 import app from '../firebaseConfig';
@@ -69,7 +72,7 @@ const ChatList = () => {
     <div className="chatList">
         <span className='title'>DASHBOARD</span>
         <button className='new-chat-btn' onClick={createNewChat}>
-          + New Chat
+          <FontAwesomeIcon icon={faPenToSquare}></FontAwesomeIcon> New Chat
         </button>
         <Link to={'/dashboard/favorites'}>Favorites</Link>
         <Link to={'/'}>Contact</Link>

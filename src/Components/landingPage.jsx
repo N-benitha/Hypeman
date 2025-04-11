@@ -3,7 +3,12 @@ import './landingPage.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTwitter, faLinkedin, faGithub } from "@fortawesome/free-brands-svg-icons";
 import { Link, useNavigate } from 'react-router-dom';
-import SignUp from './signup';
+// import webImage from '../assets/images/web-image.png';
+// import audioFeature from '../assets/images/audio-feature.png';
+// import durationFeature from '../assets/images/duration-feature.png';
+// import historyFeature from '../assets/images/history-feature.png';
+// import newChatFeature from '../assets/images/newchat-feature.png';
+
 
 const LandingPage = () => {
   const [count, setCount] = useState(0)
@@ -50,7 +55,7 @@ const LandingPage = () => {
         <div className="our-web">
             <div className="start-here">
                 <button className='start-here-btn' onClick={handleSignUp}>Start Using</button>
-                <img src="../../web-image.png" className="first-image" alt="web-images" />
+                <img src="/images/web-image.png" className="first-image" alt="web-images" />
                 
             </div>
 
@@ -59,30 +64,30 @@ const LandingPage = () => {
                 <ul>
                 <li>
                     <div className="feature-1">
-                    <p className='feature-caption'>Play button that allows to pause/play the generated audio.</p>
-                    <img src="../../play-feature.png" alt="play-feature" />
+                    <p className='feature-caption'>Upward arrow feature allows you to send your prompt to the system.</p>
+                    <img src="/images/generate-feature.png" alt="play-feature" />
                     </div>
                 </li>
 
                 <li>
                     <div className="feature-1">
-                    <img src="../../duration-feature.png" alt="duration-feature" />
-                    <p className='feature-caption'>Duration selection box allows you to choose how long your audio is intended to last.</p>
+                    <img src="/images/duration-feature.png" alt="duration-feature" />
+                    <p className='feature-caption'>Duration feature selection box allows you to choose how long your audio is intended to last.</p>
                     </div>
 
                 </li>
 
                 <li>
                     <div className="feature-1">
-                    <p className='feature-caption'>Heart feature allows you to save your favorite audios so that you can reuse them in the future.</p>
-                    <img src="../../favorite-feature.png" alt="favorite-feature" />
+                    <p className='feature-caption'>New Chat feature allows you to create a new chat for a fresh conversation.</p>
+                    <img src="/images/newchat-feature.png" alt="favorite-feature" />
                     </div>
                 </li>
 
                 <li>
                     <div className="feature-1">
-                    <img src="../../history-feature.png" alt="history-feature" />
-                    <p className='feature-caption'>View all your generated audios in the history pane.</p>
+                    <img src="/images/history-feature.png" alt="history-feature" />
+                    <p className='feature-caption'>History feature allows you access to all your previously generated audios.</p>
                     </div>
                 </li>
 
@@ -95,12 +100,12 @@ const LandingPage = () => {
             <div className="about-us">
                 <p>This project has been made for the purpose of motivating, giving affirmations and boosting users' confidence. As many individuals face imposter syndrome, myself included, this website will help improve their mood and motivate them to keep going. Huge thanks to <a href='https://www.alxafrica.com/' alt='alx-link'>ALX</a> who made this project possible by always pushing us.</p>
                 <div className="icon-socials">
-                    <FontAwesomeIcon icon={faTwitter} onClick={() => window.open('https://twitter.com', '_blank', 'noopener noreferrer')}  style={{ cursor: 'pointer', fontSize: '24px', padding: '10px'}}/>
-                    <FontAwesomeIcon icon={faLinkedin} onClick={() => window.open('https://linkedin.com', '_blank', 'noopener noreferrer')} style={{ cursor: 'pointer', fontSize: '24px', padding: '10px'}}/>
-                    <FontAwesomeIcon icon={faGithub} onClick={() => window.open('https://github.com', '_blank', 'noopener noreferrer')} style={{ cursor: 'pointer', fontSize: '24px', padding: '10px'}}/>
+                    <FontAwesomeIcon icon={faTwitter} onClick={() => window.open('https://x.com/benitha__', '_blank', 'noopener noreferrer')}  style={{ cursor: 'pointer', fontSize: '24px', padding: '10px'}}/>
+                    <FontAwesomeIcon icon={faLinkedin} onClick={() => window.open('https://www.linkedin.com/in/ngunga-benitha-26b43921b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app', '_blank', 'noopener noreferrer')} style={{ cursor: 'pointer', fontSize: '24px', padding: '10px'}}/>
+                    <FontAwesomeIcon icon={faGithub} onClick={() => window.open('https://github.com/N-benitha', '_blank', 'noopener noreferrer')} style={{ cursor: 'pointer', fontSize: '24px', padding: '10px'}}/>
                 </div>
                 <div>
-                    <a href="#">Project Repository</a>
+                    <a href="https://github.com/N-benitha/Hypeman2">Project Repository</a>
                 </div>
             </div>
         

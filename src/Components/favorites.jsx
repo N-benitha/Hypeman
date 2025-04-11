@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { getAuth } from 'firebase/auth';
-import { collection, deleteDoc, doc, getFirestore, onSnapshot, query } from 'firebase/firestore';
+import { collection, deleteDoc, doc, getFirestore, onSnapshot, query, where } from 'firebase/firestore';
 import './favorites.css';
 import app from '../firebaseConfig';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
+import AudioPlayer from './audioPlayer';
 
 const Favorites = () => {
     const [favorites, setFavorites] = useState([]);
@@ -67,9 +68,16 @@ const Favorites = () => {
                     <div key={favorite.id} className="favorite-item">
                         <div className="favorite-content">{favorite.content}</div>
                         <div className="favorite-audio">
-                            <audio controls src={favorite.audioUrl}>
-                                Your browser does not support the audio element.
-                            </audio>
+                            {favorite.audioId ? (
+                                <AudioPlayer audioId={favorite.audioId} /> //fetching and playing audio
+                            ) : favorite.audioData ? (
+                                // for backward compatibility with old favorites
+                                <audio controls src={`data:audio/wav;base64,${favorite.audioData}`}>
+                                    Your browser does not support the audio element.
+                                </audio>
+                            ) : (
+                                <div>Audio unavailable</div>
+                            )}
                         </div>
                         <button className='remove-favorite' onClick={() => removeFavorite(favorite.id)}>
                             <FontAwesomeIcon icon={faHeart}></FontAwesomeIcon>
