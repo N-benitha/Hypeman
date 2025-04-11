@@ -18,7 +18,7 @@ Hypeman API serves as the backend for the Hypeman platform, providing endpoints 
 - 🤖 AI-powered text generation using Groq's LLaMa 3.3 70B model
 - 🔊 Text-to-speech conversion with PlayAI TTS
 - 🔥 Firebase integration for user data storage and retrieval
-- 🔒 Environment-based configuration for secure deployment
+- 📖 Persistent Chat History
 
 ## Technologies
 
