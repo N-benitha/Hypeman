@@ -130,7 +130,7 @@ const NewPrompt = ({ onSendMessage, chatId }) => {
           {error && <div className='error-message'>{error}</div>}
           <form className='newForm' onSubmit={handleSubmit}>
               <select className="duration-select" value={selectedDuration} onChange={(e) => setSelectedDuration(Number(e.target.value))}>
-                      <option value="1">1 min</option>
+                      <option value="1">35 sec</option>
                       <option value="3">3 min</option>
                       <option value="5">5 min</option>
                       <option value="10">10 min</option>

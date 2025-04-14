@@ -12,6 +12,10 @@ dist
 dist-ssr
 *.local
 .env
+*.json
+backend/.env
+**\service_account_key.json
+vite.config.js
 
 # Editor directories and files
 .vscode/*
