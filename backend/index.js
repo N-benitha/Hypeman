@@ -4,15 +4,19 @@ import { createRequire } from 'module';
 import dotenv from 'dotenv';
 import axios from 'axios';
 
-dotenv.config();
+// Only load from .env file if not production
+if (process.env.NODE_ENV !== 'production') {
+  dotenv.config();
+}
 const port = process.env.PORT || 3000;
 const app = express();
 
 let admin;
+let serviceAccount;
 
 // middleware for CORS
 app.use(cors({
-    origin: process.env.CLIENT_URL || "http://localhost:5173",
+    origin: [process.env.CLIENT_URL, "https://hypeman-7678f.web.app/"],
 }));
 
 app.use(express.json());
@@ -22,7 +26,15 @@ const connect = async () => {
 
     const require = createRequire(import.meta.url);
     admin = require("firebase-admin");
-    var serviceAccount = require("./service_account_key.json");
+
+    if (process.env.FIREBASE_CONFIG) {
+      serviceAccount = JSON.parse(process.env.FIREBASE_CONFIG);
+    }
+    else {
+      serviceAccount = require("./service_account_key.json");
+    }
+    // serviceAccount = require("./service_account_key.json");
+    
 
     try {
       admin.initializeApp({

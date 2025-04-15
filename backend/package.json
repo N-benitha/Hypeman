@@ -5,16 +5,22 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "nodemon --env-file .env index.js",
+    "start": "node index.js",
+    "dev": "nodemon --env-file .env index.js",
+    "build": "echo 'NO build step required'",
     "test": "hi"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^1.6.0",
     "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
     "express": "^4.21.2",
     "firebase": "^11.5.0",
-    "firebase-admin": "^13.2.0",
+    "firebase-admin": "^13.2.0"    
+  },
+  "devDependencies": {
     "nodemon": "^3.1.9"
   }
 }
