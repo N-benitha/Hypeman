@@ -32,9 +32,7 @@ const connect = async () => {
     }
     else {
       serviceAccount = require("./service_account_key.json");
-    }
-    // serviceAccount = require("./service_account_key.json");
-    
+    }    
 
     try {
       admin.initializeApp({
