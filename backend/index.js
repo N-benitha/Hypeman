@@ -27,12 +27,13 @@ const connect = async () => {
     const require = createRequire(import.meta.url);
     admin = require("firebase-admin");
 
-    if (process.env.FIREBASE_CONFIG) {
-      serviceAccount = JSON.parse(process.env.FIREBASE_CONFIG);
-    }
-    else {
-      serviceAccount = require("./service_account_key.json");
-    }    
+    // if (process.env.FIREBASE_CONFIG) {
+    //   serviceAccount = JSON.parse(process.env.FIREBASE_CONFIG);
+    // }
+    // else {
+    //   serviceAccount = require("./service_account_key.json");
+    // }
+    serviceAccount = JSON.parse(process.env.FIREBASE_CONFIG);
 
     try {
       admin.initializeApp({
